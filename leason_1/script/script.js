@@ -8,4 +8,3 @@ let money,
 
 alert ("hello World");    
 console.log(123);
-console.log("про");
