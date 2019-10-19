@@ -1,10 +1,10 @@
-let money = (50000), 
-    income = ('такси'), 
-    addExpenses = ('Гараж, Интернет, Кот'), 
-    deposit = (true), 
-    mission = (1000000), 
-    period = (12),
-    budgetDay = (money / 30);
+let money = 50000, 
+    income = 'такси', 
+    addExpenses = 'Гараж, Интернет, Кот', 
+    deposit = true, 
+    mission = 1000000, 
+    period = 12,
+    budgetDay = money / 30;
 
 console.log('Тип данных "money":' + typeof money);
 console.log('Тип данных "income":' + typeof income);
@@ -13,8 +13,9 @@ console.log('Длина строки "income":' + income.length + ' символ
 console.log('Период ' + period + ' месяцев' );
 console.log('Цель заработать ' + mission + ' рублей');
 
-console.log(addExpenses.split(', '));
-console.log(addExpenses.toLowerCase());
+
+console.log(addExpenses.toLowerCase().split(', '));
+
 
 console.log('Дневной бюджет:' + budgetDay);
 console.log('Остаток от деления:' + (money % 30));
