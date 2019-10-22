@@ -21,8 +21,8 @@ do {
 } while (isNaN(parseFloat(cash02)) && !isFinite(cash02));
 
 
-let budgetMonth = money - (cash01 + cash02),
-    budgetDay = +Math.floor(budgetMonth / 30);
+// let budgetMonth = money - (cash01 + cash02),
+let budgetDay = +Math.floor((money - (cash01 + cash02)) / 30);
 
 
 let showTypeOf = function(data) {
@@ -52,16 +52,15 @@ let getStatusIncome = function() {
 console.log(getStatusIncome());
 
 
-function getAccumulatedMonth() {
+function getExpensesMonth () {
     return cash01 + cash02;
 }
 
-
-function getExpensesMonth () {
-    return money - getAccumulatedMonth();
+function  getAccumulatedMonth () {
+    return money - getExpensesMonth();
 }
 
-let accumulatedMonth = getExpensesMonth();
+let accumulatedMonth = getAccumulatedMonth();
 
 console.log('Накопления за период: ' + accumulatedMonth + ' рублей');
 
