@@ -37,7 +37,7 @@ showTypeOf(deposit);
 // console.log('Цель будет достигнута через: ' + Math.ceil(mission / budgetMonth) + ' месяцев');
 
 
-let getBudgetDay = function() {
+let getStatusIncome = function() {
     if (budgetDay >= 800) {
         return ('Высокий уровень дохода');
     } else if (budgetDay >= 300 && budgetDay < 800) {
@@ -49,21 +49,21 @@ let getBudgetDay = function() {
     }
 };
 
-console.log(getBudgetDay());
+console.log(getStatusIncome());
+
+
+function getAccumulatedMonth() {
+    return cash01 + cash02;
+}
 
 
 function getExpensesMonth () {
-    let sum = cash01 + cash02;
-        function getAccumulatedMonth() {
-            return money - sum;
-        }
-    getAccumulatedMonth();
-    return getAccumulatedMonth();
+    return money - getAccumulatedMonth();
 }
 
 let accumulatedMonth = getExpensesMonth();
 
-
+console.log('Накопления за период: ' + accumulatedMonth + ' рублей');
 
 function getTargetMonth() {
     return Math.floor(mission / accumulatedMonth); 
