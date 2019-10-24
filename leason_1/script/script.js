@@ -27,30 +27,26 @@ let income = 'фриланс',
 // } while (isNaN(parseFloat(cash02)) && !isFinite(cash02));
 
 let getExpensesMonth = function() {
-    let sum1,
-        sum2;
+    let sum = 0,
+        cost;
 
     for (let i = 0; i < 2; i++) {
         if (i === 0) {
             Expenses01 = prompt('Введите обязательную статью расходов:','Машина, дача,');
-
-            do {
-                sum1 = +prompt('Во сколько это обойдется?', '10000');
-            } while (isNaN(sum1) || sum1 === null || sum1 === '' || sum1 === 0);
-
         }
         if (i === 1) {
             Expenses02 = prompt('Введите обязательную статью расходов:','Квартплата');
-
-            do {
-                sum2 = +prompt('Во сколько это обойдется?', '10000');
-            } while (isNaN(sum2) || sum2 === null || sum2 === '' || sum2 === 0);
-            
         }
         
+        do {
+            cost = prompt('Во сколько это обойдется?', '10000');
+        } while (isNaN(cost) || cost === null || cost === '' || cost === 0);
+
+        sum += +cost;
+
     }
 
-    return sum1 + sum2;
+    return sum;
 };
 
 let expensesMonth = getExpensesMonth();
