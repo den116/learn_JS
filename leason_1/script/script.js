@@ -42,13 +42,13 @@ let appDate = {
         appDate.budgetDay = +Math.floor((appDate.budgetMonth) / 30);
     },
     getTargetMonth: function() {
-        if (appDate.getTargetMonth() < 0) {
+        let a = Math.floor(appDate.mission / appDate.budgetMonth);
+
+        if (a < 0) {
             console.log('Цель не будет достигнута!');
         } else {
-            console.log('Цель будет достигнута через ' + Math.ceil(appDate.getTargetMonth()) + ' месяцев');
+            console.log('Цель будет достигнута через ' + Math.ceil(a) + ' месяцев');
         }
-        
-        return Math.floor(appDate.mission / appDate.budgetMonth);
     },
     
     asking: function() {
@@ -76,13 +76,15 @@ let appDate = {
 appDate.asking(); 
 appDate.getExpensesMonth();
 appDate.getBudget();   
-console.log('Расходы за месяц: ' + appDate.getExpensesMonth() + ' рублей');
+console.log('Расходы за месяц: ' + appDate.expensesMonth + ' рублей');
 console.log('Цель будет достигнута через: ' + Math.ceil(appDate.mission / appDate.budgetMonth) + ' месяцев');
 console.log(appDate.getStatusIncome());
+console.log('Наша программа включает в себя данные: ');
 
 for (let key in appDate) {
-    console.log('Наша программа включает в себя данные: ' + key + ' : ' + appDate[key]);
+    console.log(key + ' : ' + appDate[key]);
 }
+    
 
 
 
