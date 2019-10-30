@@ -41,6 +41,7 @@ let appDate = {
         let addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую','машина, дача');
             appDate.addExpenses = addExpenses.toLowerCase().split(', ');
             appDate.deposit = confirm('Есть ли у вас депозит в банке?');
+            appDate.getInfoDeposit();
             
             for (let i = 0; i < 2; i++ ) {
                 let q1,
@@ -116,6 +117,7 @@ let appDate = {
 };
     
 appDate.asking(); 
+
 appDate.getExpensesMonth();
 appDate.getBudget();   
 console.log('Расходы за месяц: ' + appDate.expensesMonth + ' рублей');
