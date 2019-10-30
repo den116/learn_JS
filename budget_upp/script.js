@@ -1,8 +1,8 @@
 'Use strict';
 
 let startBtn = document.querySelector('#start'),
-    icomeBtn = document.querySelector('button'),
-    expensesBtn = document.querySelectorAll('button')[1],
+    incomeBtn = document.querySelector('.income_add'),
+    expensesBtn = document.querySelector('.expenses_add'),
     checkBox = document.querySelector('#deposit-check'),
     inputsIncome = document.querySelectorAll('.additional_income-item'),
 
