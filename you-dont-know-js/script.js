@@ -1,6 +1,6 @@
 'Use strict';
 
-let collect = document.querySelectorAll('.books'),
+let collect = document.querySelector('.books'),
     elem = document.querySelectorAll('.book');
 
 console.log(collect);
@@ -8,9 +8,9 @@ console.log(elem);
 
 // восстанавливаем порядок книг:
 
-collect[0].insertBefore(elem[1], elem[0]);
-collect[0].insertBefore(elem[4], elem[3]);
-collect[0].appendChild(elem[2]);
+collect.insertBefore(elem[1], elem[0]);
+collect.insertBefore(elem[4], elem[3]);
+collect.appendChild(elem[2]);
 
 //Заменяем картинку:
 
