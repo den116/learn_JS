@@ -30,7 +30,7 @@ let ulBook2 = document.querySelectorAll('ul')[1],
     liBook2 = ulBook2.querySelectorAll('li');
 
 ulBook2.insertBefore(liBook2[6], liBook2[4]);
-ulBook2.insertBefore(liBook2[8], liBook2[5]);
+ulBook2.insertBefore(liBook2[8], liBook2[4]);
 ulBook2.insertBefore(liBook2[2], liBook2[10]);
 
 // восстанавливаем порядок глав во пятой книге:
@@ -50,7 +50,7 @@ let ulBook6 = document.querySelectorAll('ul')[5],
 newElem.textContent = 'Глава 8: За пределами ES6';
 ulBook6.appendChild(newElem);
 
-liBook6 = ulBook6.querySelectorAll('li');
+let liBook6 = ulBook6.querySelectorAll('li');
 ulBook6.insertBefore(liBook6[10], liBook6[9]);
 
 
