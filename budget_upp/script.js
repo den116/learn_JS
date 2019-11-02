@@ -86,6 +86,7 @@ let appDate = {
     },
 
     blockedInput: function() {
+      allInputs = document.querySelectorAll('input[type=text]');
       for (let item of allInputs) {
         item.setAttribute('disabled', 'disabled');
       }
