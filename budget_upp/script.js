@@ -131,12 +131,11 @@ let appDate = {
             cashIncome = item.querySelector('.income-amount').value;
         if (itemIncome !== '' && cashIncome !== '') {
           appDate.income[itemIncome] = +cashIncome;
-        }
-
-        for (let key in appDate.income) {
-          appDate.incomeMonth += +appDate.income[key];
-        }
+        }  
       });
+      for (let key in appDate.income) {
+        appDate.incomeMonth += +appDate.income[key];
+      }
     },
 
     showResult: function() {
