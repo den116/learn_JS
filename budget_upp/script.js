@@ -22,7 +22,10 @@ let start = document.querySelector('#start'),
     expensesItems = document.querySelectorAll('.expenses-items'),
     additionalExpensesItem = document.querySelector('.additional_expenses-item'),
     targetAmount = document.querySelector('.target-amount'),
-    periodSelect = document.querySelector('.period-select');
+    periodSelect = document.querySelector('.period-select'),
+
+    cancelBtn = document.querySelector('#cancel'),
+    allInputs = document.querySelectorAll('input[type=text]');
 
 
 let appDate = {
@@ -51,16 +54,22 @@ let appDate = {
 
       appDate.budget = +salaryAmount.value;
 
+      
       appDate.getExpenses();
-      appDate.getIncome();
-      appDate.getExpensesMonth();
       appDate.getAddExpenses();
       appDate.getAddIncome();
+      appDate.getIncome();
+      appDate.getExpensesMonth();
       appDate.getBudget();
+      
       appDate.getRngValue();
       appDate.blockedInput();
 
       appDate.showResult();
+    },
+
+    getReset: function() {
+      location.reload();
     },
 
     getSalaryAmount: function() {
@@ -77,12 +86,11 @@ let appDate = {
     },
 
     blockedInput: function() {
-      let allInputs = document.querySelectorAll('input[type=text]');
       for (let item of allInputs) {
         item.setAttribute('disabled', 'disabled');
       }
       start.setAttribute('style', 'display: none');
-      document.querySelector('#cancel').setAttribute('style', 'display: block');
+      cancelBtn.setAttribute('style', 'display: block');
     },
 
     addExpensesBlock: function() {
@@ -110,6 +118,10 @@ let appDate = {
         if (itemExpenses !== '' && cashExpenses !== '') {
           appDate.expenses[itemExpenses] = +cashExpenses;
         }
+
+        // for (let key in appDate.expenses) {
+        //   appDate.expensesMonth += +appDate.expenses[key];
+        // }
       });
     },
 
@@ -158,9 +170,9 @@ let appDate = {
     
     getExpensesMonth: function() {
         for (let key in appDate.expenses) {
-            appDate.expensesMonth += appDate.expenses[key];
+            appDate.expensesMonth += +appDate.expenses[key];
         }
-        return appDate.expensesMonth;
+        // return appDate.expensesMonth;
     },
 
     getStatusIncome: function() {
@@ -196,8 +208,8 @@ let appDate = {
     },
  
     calcPeriod: function() {
-      return periodSelect.value;
-        // return appDate.budgetMonth * periodSelect.value;
+      // return periodSelect.value;
+        return appDate.budgetMonth * periodSelect.value;
     },
 
     getUpperCase: function() {
@@ -216,6 +228,7 @@ let appDate = {
 
 salaryAmount.addEventListener('input', appDate.getSalaryAmount);
 start.addEventListener('click', appDate.start);
+cancelBtn.addEventListener('click', appDate.getReset);
 expensesPlus.addEventListener('click', appDate.addExpensesBlock);
 incomePlus.addEventListener('click', appDate.addIncomeBlock);
 periodSelect.addEventListener('input', appDate.getRngValue);
