@@ -26,8 +26,8 @@ let start = document.querySelector('#start'),
     periodSelect = document.querySelector('.period-select'),
 
     cancelBtn = document.querySelector('#cancel'),
-    allInputsLeft = document.querySelectorAll('input[type=text]'),
-    allInputs = document.querySelectorAll('input');
+    allInputsRight = document.querySelectorAll('.result-total'),
+    allInputs = document.querySelectorAll('input[type=text]');
 
 
 let appDate = {
@@ -45,44 +45,35 @@ let appDate = {
     moneyDeposit: 0,
     start: function() {
 
-      
-      // if (salaryAmount.value === '') {
-      //   alert ('Ошибка, поле "Месячный доход" должно быть заполненно!');
-      // } else if (isNaN(salaryAmount.value)) {
-      //   alert ('Введите числовое значение!');
-      //   return;
-      // }
-
       this.budget = +salaryAmount.value;
 
-      
       this.getExpenses();
       this.getAddExpenses();
       this.getAddIncome();
       this.getIncome();
       this.getExpensesMonth();
       this.getBudget();
-      
       this.getRngValue();
       this.blockedInput();
-
       this.showResult();
+
+      periodSelect.addEventListener('input', this.dinamicCalcPeriod);
     },
 
     getReset: function() {
     
-      appDate.income = {};
-      appDate.addIncome = [];
-      appDate.expenses = {};
-      appDate.addExpenses = [];
-      appDate.deposit = false;
-      appDate.incomeMonth = 0;
-      appDate.budget = 0;
-      appDate.budgetDay = 0;
-      appDate.budgetMonth = 0;
-      appDate.expensesMonth = 0;
-      appDate.percentDeposit = 0;
-      appDate.moneyDeposit = 0;
+      this.income = {};
+      this.addIncome = [];
+      this.expenses = {};
+      this.addExpenses = [];
+      this.deposit = false;
+      this.incomeMonth = 0;
+      this.budget = 0;
+      this.budgetDay = 0;
+      this.budgetMonth = 0;
+      this.expensesMonth = 0;
+      this.percentDeposit = 0;
+      this.moneyDeposit = 0;
 
       expensesItems.forEach(function(item) {
         expensesItems = document.querySelectorAll('.expenses-items');
@@ -100,18 +91,24 @@ let appDate = {
       });      
       incomePlus.style.display = 'block';
 
-      allInputs = document.querySelectorAll('input');
+      allInputs = document.querySelectorAll('input[type=text]');
       for (let item of allInputs) {
         item.removeAttribute('disabled');
         item.value = '';
       }
+ 
+      for (let item of allInputsRight) {
+        item.setAttribute('disabled', 'disabled');
+      }
       
+      
+
       checkBox.checked = false;
       periodSelect.value = '1';
       
-      appDate.getRngValue();
-      appDate.getSalaryAmount();
-      salaryAmount.addEventListener('input', appDate.getSalaryAmount);
+      this.getRngValue();
+      this.getSalaryAmount();
+      salaryAmount.addEventListener('input', this.getSalaryAmount);
       
       start.setAttribute('style', 'display: block');
       cancelBtn.setAttribute('style', 'display: none');
@@ -131,8 +128,8 @@ let appDate = {
     },
 
     blockedInput: function() {
-      allInputsLeft = document.querySelectorAll('input[type=text]');
-      for (let item of allInputsLeft) {
+      allInputs = document.querySelectorAll('input[type=text]');
+      for (let item of allInputs) {
         item.setAttribute('disabled', 'disabled');
       }
       start.setAttribute('style', 'display: none');
@@ -176,7 +173,7 @@ let appDate = {
         }  
       });
       for (let key in this.income) {
-        this.incomeMonth += +appDate.income[key];
+        this.incomeMonth += +this.income[key];
       }
     },
 
@@ -239,19 +236,24 @@ let appDate = {
     },
 
     getInfoDeposit: function() {
-        if (appDate.deposit) {
+        if (this.deposit) {
             do {
-                appDate.percentDeposit = +prompt ('Какой годовой процент?', '10');
-            } while (isNaN(appDate.percentDeposit) || appDate.percentDeposit === null || appDate.percentDeposit === '' || appDate.percentDeposit === 0);
+                this.percentDeposit = +prompt ('Какой годовой процент?', '10');
+            } while (isNaN(this.percentDeposit) || this.percentDeposit === null || this.percentDeposit === '' || this.percentDeposit === 0);
             do {
-                appDate.moneyDeposit = prompt ('Какая сумма заложена?', '10000');
-            } while (isNaN(appDate.moneyDeposit) || appDate.moneyDeposit === null || appDate.moneyDeposit === '' || appDate.moneyDeposit === 0);
+                this.moneyDeposit = prompt ('Какая сумма заложена?', '10000');
+            } while (isNaN(this.moneyDeposit) || this.moneyDeposit === null || this.moneyDeposit === '' || this.moneyDeposit === 0);
           }
     },
  
     calcPeriod: function() {
       // return periodSelect.value;
         return this.budgetMonth * periodSelect.value;
+    },
+
+    dinamicCalcPeriod: function () {
+      incomePeriodValue.value = appDate.calcPeriod();
+      return incomePeriodValue.value;
     },
 
     getUpperCase: function() {
@@ -270,7 +272,7 @@ let appDate = {
 
 salaryAmount.addEventListener('input', appDate.getSalaryAmount);
 start.addEventListener('click', appDate.start.bind(appDate));
-cancelBtn.addEventListener('click', appDate.getReset);
+cancelBtn.addEventListener('click', appDate.getReset.bind(appDate));
 expensesPlus.addEventListener('click', appDate.addExpensesBlock);
 incomePlus.addEventListener('click', appDate.addIncomeBlock);
 periodSelect.addEventListener('input', appDate.getRngValue);
@@ -279,6 +281,7 @@ periodSelect.addEventListener('input', appDate.getRngValue);
 appDate.getTargetMonth();
 appDate.getUpperCase();
 appDate.getSalaryAmount();
+
 
 // console.log(appDate.getUpperCase());
 // console.log('Наша программа включает в себя данные: ');
