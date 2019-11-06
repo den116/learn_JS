@@ -5,6 +5,7 @@ let start = document.querySelector('#start'),
     incomePlus = btnPlus[0],
     expensesPlus = btnPlus[1],
     checkBox = document.querySelector('#deposit-check'),
+    checkBoxItem = document.querySelector('.deposit-checkmark::after'),
     additionalIncomeItem = document.querySelectorAll('.additional_income-item'),
 
     budgetMonthValue = document.querySelector('.budget_month-value'),
@@ -83,27 +84,32 @@ let appDate = {
       appDate.percentDeposit = 0;
       appDate.moneyDeposit = 0;
 
-      periodSelect.value = 1;
-      checkBox.value = false;
+      expensesItems.forEach(function(item) {
+        expensesItems = document.querySelectorAll('.expenses-items');
+        if (expensesItems.length > 1) {
+          item.remove();
+        } 
+      });      
+      expensesPlus.style.display = 'block';
 
-      expensesItems = document.querySelectorAll('.expenses-items');
-      console.log(expensesItems.langth);      
-      if (expensesItems.langth > 2) {
-        expensesItems.parentNode.removeChild(expensesItems[2]);
-      }
-      
-      incomeItems.length = 1;
-      
+      incomeItems.forEach(function(item) {
+        incomeItems = document.querySelectorAll('.income-items');
+        if (incomeItems.length > 1) {
+          item.remove();
+        } 
+      });      
+      incomePlus.style.display = 'block';
 
-      allInputsLeft = document.querySelectorAll('input[type=text]');
-      for (let item of allInputsLeft) {
-        item.removeAttribute('disabled');
-      }
-
+      allInputs = document.querySelectorAll('input');
       for (let item of allInputs) {
+        item.removeAttribute('disabled');
         item.value = '';
       }
-
+      
+      checkBox.checked = false;
+      periodSelect.value = '1';
+      
+      appDate.getRngValue();
       appDate.getSalaryAmount();
       salaryAmount.addEventListener('input', appDate.getSalaryAmount);
       
