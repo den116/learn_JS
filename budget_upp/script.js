@@ -58,7 +58,7 @@ AppDate.prototype.start = function() {
   this.blockedInput();
   this.showResult();
 
-  periodSelect.addEventListener('input', this.dinamicCalcPeriod);
+  periodSelect.addEventListener('input', this.dinamicCalcPeriod.bind(this));
 };
 
 AppDate.prototype.getReset = function() {
@@ -255,8 +255,7 @@ AppDate.prototype.calcPeriod = function() {
 };
 
 AppDate.prototype.dinamicCalcPeriod = function () {
-  console.log(this);
-  incomePeriodValue.value = appDate.calcPeriod();
+  incomePeriodValue.value = this.calcPeriod();
   return incomePeriodValue.value;
 };
 
