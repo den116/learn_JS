@@ -6,25 +6,23 @@ function DomElement (selector, height, width, bg, fontSize) {
   this.fontSize = fontSize;
 
   DomElement.prototype.newElem = function () {
-    let selectorValue = this.selector.value,
+    let selectorValue = this.selector,
         elem;
-
     if (selectorValue.startsWith('.', 0)) {
       elem = document.createElement('div');
-      elem.setAttriblute('class', selectorValue.slice(1));
-      document.body.appendChild(elem);
+      elem.setAttribute('class', selectorValue.slice(1));
     } else if (selectorValue.startsWith('#', 0)) {
       elem = document.createElement('p');
-      elem.setAttriblute('id', selectorValue.slice(1));
-      document.body.appendChild(elem);
+      elem.setAttribute('id', selectorValue.slice(1));
+      elem.textContent="Текст";
     }
+    console.log(elem);
+    elem.style.cssText = `height: ${this.height}; width: ${this.width}; background: ${this.bg}; font-size: ${this.fontSize};`;
 
-    elem.style.cssText =`color: red !important;
-    background-color: yellow;
-    width: 100px;
-    text-align: center;
-`;
-    
+    document.body.appendChild(elem);
   };
 }
 
+let el = new DomElement('#hello', '100px', '100px', 'red', '20px');
+
+el.newElem();
