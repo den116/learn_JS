@@ -54,6 +54,7 @@ AppDate.prototype.start = function() {
   
   this.getExpInc();
   this.getAddExpInc(additionalIncomeItem, additionalExpensesItem);
+  
   // this.getAddExpenses();
   // this.getAddIncome();
   this.getExpensesMonth();
@@ -81,17 +82,20 @@ AppDate.prototype.getReset = function() {
   this.percentDeposit = 0;
   this.moneyDeposit = 0;
 
-expensesItems.forEach(function(item) {
+  incomeItems = document.querySelectorAll('.income-items');
   expensesItems = document.querySelectorAll('.expenses-items');
-  if (expensesItems.length > 1) {
+
+expensesItems.forEach(function(item, i) {
+  // expensesItems = document.querySelectorAll('.expenses-items');
+  if (i >= 1) {
     item.remove();
   } 
 });      
 expensesPlus.style.display = 'block';
 
-incomeItems.forEach(function(item) {
-  incomeItems = document.querySelectorAll('.income-items');
-  if (incomeItems.length > 1) {
+incomeItems.forEach(function(item, i) {
+  // incomeItems = document.querySelectorAll('.income-items');
+  if (i >= 1) {
     item.remove();
   } 
 });      
@@ -231,6 +235,20 @@ AppDate.prototype.getAddExpInc = function (income, expenses) {
   expenses.forEach(pushItem);
       add = this.addIncome;
   incomeArr.forEach(pushItem);
+
+  // if (typeof (items.value) === 'string') {
+  //   items = items.value.split(',');
+  // }
+  // items.forEach(item => {
+  //   if (typeof item === 'string') {
+  //     item = item.trim();
+  //   } else {
+  //     item.value.trim();
+  //   }
+  //   if (item != '') {
+  //     exportArr.push(item);
+  //   }
+  // });
 };
 
 AppDate.prototype.getExpensesMonth = function() {
