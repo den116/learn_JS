@@ -172,6 +172,9 @@ AppDate.prototype.addExpIncBlock = function(item, btn) {
 
 AppDate.prototype.getExpInc = function() {
 
+incomeItems = document.querySelectorAll('.income-items');
+expensesItems = document.querySelectorAll('.expenses-items');
+
   const count = item => {
     const startStr = item.className.split('-')[0];
     const itemTitle = item.querySelector(`.${startStr}-title`).value;
